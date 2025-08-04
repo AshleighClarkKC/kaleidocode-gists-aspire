@@ -6,12 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kaleidocode.Gists.Modules.Persistence.Models.Results
-{
-    public record CreateLookupCommandResult<TUserId> : BaseCommandResult<TUserId> where TUserId : struct
-    {
-        public string Name { get; set; } = string.Empty;
+namespace Kaleidocode.Gists.Modules.Persistence.Models.Results;
 
-        public string Description { get; set; } = string.Empty;
-    }
+public record CreateLookupCommandResult<TUserId> : BaseCommandResult<TUserId> where TUserId : struct
+{
+    public string Name { get; set; } = string.Empty;
+
+    public string Description { get; set; } = string.Empty;
 }

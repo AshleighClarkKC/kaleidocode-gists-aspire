@@ -1,7 +1,7 @@
-﻿namespace Kaleidocode.Gists.Services.User.Properties
+﻿namespace Kaleidocode.Gists.Services.User.Properties;
+
+public static class ApplicationConstants
 {
-    public static class ApplicationConstants
-    {
-        public const string AuthenticationConfigurationSectionName = "Entra";
-    }
+    public const string AuthenticationConfigurationSectionName = "Entra";
 }
+

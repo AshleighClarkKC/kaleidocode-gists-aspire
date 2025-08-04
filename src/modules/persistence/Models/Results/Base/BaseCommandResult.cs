@@ -1,29 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+namespace Kaleidocode.Gists.Modules.Persistence.Models.Results.Base;
 
-namespace Kaleidocode.Gists.Modules.Persistence.Models.Results.Base
+public record BaseCommandResult<TUserId> where TUserId : struct
 {
-    public record BaseCommandResult<TUserId> where TUserId : struct
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        public bool IsActive { get; set; } = true;
+    public bool IsActive { get; set; } = true;
 
-        public bool IsDeleted { get; set; } = false;
+    public bool IsDeleted { get; set; } = false;
 
-        public DateTime CreatedDate { get; set; }
+    public DateTime CreatedDate { get; set; }
 
-        public TUserId CreatedBy { get; set; }
+    public TUserId CreatedBy { get; set; }
 
-        public DateTime? ModifiedDate { get; set; }
+    public DateTime? ModifiedDate { get; set; }
 
-        public TUserId ModifiedBy { get; set; }
+    public TUserId ModifiedBy { get; set; }
 
-        public DateTime? DeletedDate { get; set; }
+    public DateTime? DeletedDate { get; set; }
 
-        public TUserId DeletedBy { get; set; }
-    }
+    public TUserId DeletedBy { get; set; }
 }
