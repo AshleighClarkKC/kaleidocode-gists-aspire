@@ -1,2 +1,7 @@
-# kaleidocode-gists-cqrs
-This is a base project, designed to be built as a NuGet, that is going to serve as a base to provide CQRS functionality to entities. 
+# Gists: .NET Aspire
+
+This is a demonstration of .NET Aspire usage, with the usage of the following:
+
+* CQRS Pattern for Persistence
+* (later) Mediator pattern using [LiteBus](https://github.com/litenova/LiteBus)
+* (later) Message Bus integration using [Rebus](https://rebus.fm/what-is-rebus)
