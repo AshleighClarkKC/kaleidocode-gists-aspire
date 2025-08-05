@@ -21,8 +21,8 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
             model.CreatedBy = requesterId;
 
             await _dbSet.AddAsync(model);
-            await _context.SaveChangesAsync();
 
+            await _context.SaveChangesAsync();
             await _transaction.CommitAsync();
         }
         catch (Exception ex)
@@ -48,8 +48,8 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
             }
 
             await _dbSet.AddRangeAsync(models);
-            await _context.SaveChangesAsync();
 
+            await _context.SaveChangesAsync();
             await _transaction.CommitAsync();
         }
         catch (Exception ex)
@@ -113,8 +113,8 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
             model.ModifiedBy = requesterId;
 
             _dbSet.Update(model);
-            await _context.SaveChangesAsync();
 
+            await _context.SaveChangesAsync();
             await _transaction.CommitAsync();
         }
         catch (Exception ex)
@@ -123,6 +123,7 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
             {
                 await onFailureAsync(ex);
             }
+            await _transaction.RollbackAsync();
         }
 
     }
@@ -140,8 +141,8 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
             }
 
             _dbSet.UpdateRange(models);
-            await _context.SaveChangesAsync();
 
+            await _context.SaveChangesAsync();
             await _transaction.CommitAsync();
         }
         catch (Exception ex)
@@ -205,6 +206,9 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
                     _dbSet.Update(item);
                 }
             }
+
+            await _context.SaveChangesAsync();
+            await _transaction.CommitAsync();
         }
         catch (Exception ex)
         {
@@ -212,6 +216,7 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
             {
                 await onFailureAsync(ex);
             }
+            await _transaction.RollbackAsync();
         }
     }
 }
