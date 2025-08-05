@@ -11,14 +11,17 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
     private readonly DbContext _context = context;
     private readonly DbSet<TEntity> _dbSet = context.Set<TEntity>();
 
-    public async Task InsertAsync(TEntity model, TUserId requesterId, Func<Exception, Task>? onFailureAsync = null)
+    public async Task InsertAsync(TEntity model, TUserId? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
     {
         await using var _transaction = await _context.Database.BeginTransactionAsync();
 
         try
         {
             model.CreatedDate = DateTime.Now;
-            model.CreatedBy = requesterId;
+            if (requesterId != null)
+            {
+                model.CreatedBy = requesterId.Value;
+            }
 
             await _dbSet.AddAsync(model);
 
@@ -35,7 +38,7 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
         }
     }
 
-    public async Task InsertRange(IEnumerable<TEntity> models, TUserId requesterId, Func<Exception, Task>? onFailureAsync = null)
+    public async Task InsertRange(IEnumerable<TEntity> models, TUserId? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
     {
         await using var _transaction = await _context.Database.BeginTransactionAsync();
 
@@ -44,7 +47,10 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
             foreach (var model in models) 
             {
                 model.CreatedDate = DateTime.Now;
-                model.CreatedBy = requesterId;
+                if (requesterId != null)
+                {
+                    model.CreatedBy = requesterId.Value;
+                }
             }
 
             await _dbSet.AddRangeAsync(models);
@@ -103,14 +109,17 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
         }
     }
 
-    public async Task UpdateAsync(TEntity model, TUserId requesterId, Func<Exception, Task>? onFailureAsync = null)
+    public async Task UpdateAsync(TEntity model, TUserId? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
     {
         await using var _transaction = await _context.Database.BeginTransactionAsync();
 
         try
         {
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = requesterId;
+            if (requesterId != null)
+            {
+                model.ModifiedBy = requesterId;
+            }
 
             _dbSet.Update(model);
 
@@ -128,7 +137,7 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
 
     }
 
-    public async Task UpdateRangeAsync(IEnumerable<TEntity> models, TUserId requesterId, Func<Exception, Task>? onFailureAsync = null)
+    public async Task UpdateRangeAsync(IEnumerable<TEntity> models, TUserId? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
     {
         await using var _transaction = await _context.Database.BeginTransactionAsync();
 
@@ -137,7 +146,10 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
             foreach(var model in models)
             {
                 model.ModifiedDate = DateTime.Now;
-                model.ModifiedBy = requesterId;
+                if (requesterId != null)
+                {
+                    model.ModifiedBy = requesterId;
+                }
             }
 
             _dbSet.UpdateRange(models);
@@ -155,7 +167,7 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
         }
     }
 
-    public async Task DeleteAsync<TId>(TId id, TUserId requesterId, Func<Exception, Task>? onFailureAsync = null)
+    public async Task DeleteAsync<TId>(TId id, TUserId? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
     {
         await using var _transaction = await _context.Database.BeginTransactionAsync();
 
@@ -168,7 +180,10 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
                 item.IsActive = false;
                 item.IsDeleted = true;
                 item.DeletedDate = DateTime.Now;
-                item.DeletedBy = requesterId;
+                if (requesterId != null)
+                {
+                    item.DeletedBy = requesterId;
+                }
 
                 _dbSet.Update(item);
 
@@ -186,7 +201,7 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
         }
     }
 
-    public async Task DeleteRangeAsync<TId>(IEnumerable<TId> ids, TUserId requesterId, Func<Exception, Task>? onFailureAsync = null)
+    public async Task DeleteRangeAsync<TId>(IEnumerable<TId> ids, TUserId? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
     {
         await using var _transaction = await _context.Database.BeginTransactionAsync();
 
@@ -201,7 +216,10 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
                     item.IsActive = false;
                     item.IsDeleted = true;
                     item.DeletedDate = DateTime.Now;
-                    item.DeletedBy = requesterId;
+                    if (requesterId != null)
+                    {
+                        item.DeletedBy = requesterId;
+                    }
 
                     _dbSet.Update(item);
                 }

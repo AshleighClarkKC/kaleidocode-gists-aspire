@@ -9,7 +9,8 @@ public class CreateLookupCommandValidator<TUserId> : ICommandValidator<CreateLoo
 {
     public Task ValidateAsync(CreateLookupCommand<TUserId> command, CancellationToken cancellationToken = default)
     {
-        bool entryValidated = !string.IsNullOrEmpty(command.Name) && !string.IsNullOrEmpty(command.Description);
+        bool entryValidated =
+            !string.IsNullOrEmpty(command.Name);
 
         return entryValidated
             ? Task.CompletedTask

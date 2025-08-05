@@ -8,6 +8,8 @@ namespace Kaleidocode.Gists.Modules.Persistence.Entities.Lookups;
 /// <typeparam name="TUserId">The user ID type, based on the typeparam from <see cref="BaseEntity{TUserId}"/>.</typeparam>
 public class BaseItemLookupEntity<TUserId> : BaseEntity<TUserId> where TUserId : struct
 {
+    public int? LookupTypeId { get; set; }
+
     public string Name { get; set; } = string.Empty;
 
     public string Description { get; set; } = string.Empty;

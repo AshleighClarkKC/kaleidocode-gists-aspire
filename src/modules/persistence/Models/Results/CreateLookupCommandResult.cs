@@ -8,9 +8,7 @@ using System.Threading.Tasks;
 
 namespace Kaleidocode.Gists.Modules.Persistence.Models.Results;
 
-public record CreateLookupCommandResult<TUserId> : BaseCommandResult<TUserId> where TUserId : struct
+public record CreateLookupCommandResult : BaseCommandResult
 {
-    public string Name { get; set; } = string.Empty;
-
-    public string Description { get; set; } = string.Empty;
+    public int GeneratedId { get; set; }
 }
