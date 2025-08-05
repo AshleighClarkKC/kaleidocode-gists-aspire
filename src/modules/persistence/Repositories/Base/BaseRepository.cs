@@ -11,7 +11,7 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
     private readonly DbContext _context = context;
     private readonly DbSet<TEntity> _dbSet = context.Set<TEntity>();
 
-    public async Task InsertAsync(TEntity model, TUserId? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
+    public virtual async Task InsertAsync(TEntity model, TUserId? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
     {
         await using var _transaction = await _context.Database.BeginTransactionAsync();
 
@@ -38,7 +38,7 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
         }
     }
 
-    public async Task InsertRange(IEnumerable<TEntity> models, TUserId? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
+    public virtual async Task InsertRange(IEnumerable<TEntity> models, TUserId? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
     {
         await using var _transaction = await _context.Database.BeginTransactionAsync();
 
@@ -68,7 +68,7 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
         }
     }
 
-    public async Task<TEntity?> GetByIdAsync<TId>(TId id, Func<Exception, Task>? onFailureAsync = null)
+    public virtual async Task<TEntity?> GetByIdAsync<TId>(TId id, Func<Exception, Task>? onFailureAsync = null)
     {
         TEntity? value = null;
 
@@ -88,7 +88,7 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
         return value;
     }
 
-    public async Task<IQueryable<TEntity>?> ListAsync(int limit, Func<Exception, Task>? onFailureAsync = null)
+    public virtual async Task<IQueryable<TEntity>?> ListAsync(int limit, Func<Exception, Task>? onFailureAsync = null)
     {
         try
         {
@@ -109,7 +109,7 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
         }
     }
 
-    public async Task UpdateAsync(TEntity model, TUserId? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
+    public virtual async Task UpdateAsync(TEntity model, TUserId? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
     {
         await using var _transaction = await _context.Database.BeginTransactionAsync();
 
@@ -137,7 +137,7 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
 
     }
 
-    public async Task UpdateRangeAsync(IEnumerable<TEntity> models, TUserId? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
+    public virtual async Task UpdateRangeAsync(IEnumerable<TEntity> models, TUserId? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
     {
         await using var _transaction = await _context.Database.BeginTransactionAsync();
 
@@ -167,7 +167,7 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
         }
     }
 
-    public async Task DeleteAsync<TId>(TId id, TUserId? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
+    public virtual async Task DeleteAsync<TId>(TId id, TUserId? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
     {
         await using var _transaction = await _context.Database.BeginTransactionAsync();
 
@@ -201,7 +201,7 @@ public class BaseRepository<TEntity, TUserId>(DbContext context) : IBaseReposito
         }
     }
 
-    public async Task DeleteRangeAsync<TId>(IEnumerable<TId> ids, TUserId? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
+    public virtual async Task DeleteRangeAsync<TId>(IEnumerable<TId> ids, TUserId? requesterId = null, Func<Exception, Task>? onFailureAsync = null)
     {
         await using var _transaction = await _context.Database.BeginTransactionAsync();
 

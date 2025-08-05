@@ -1,0 +1,6 @@
+@Kaleidocode.Gists.Services.General_HostAddress = http://localhost:5199
+
+GET {{Kaleidocode.Gists.Services.General_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
