@@ -3,13 +3,11 @@ using Kaleidocode.Gists.Modules.Persistence.Entities.Lookups;
 using Kaleidocode.Gists.Modules.Persistence.Models.Commands;
 using Kaleidocode.Gists.Modules.Persistence.Models.Queries;
 using Kaleidocode.Gists.Modules.Persistence.Repositories;
-using Kaleidocode.Gists.Modules.Persistence.Repositories.Base;
 using LiteBus.Commands.Extensions.MicrosoftDependencyInjection;
 using LiteBus.Messaging.Extensions.MicrosoftDependencyInjection;
 using LiteBus.Queries.Extensions.MicrosoftDependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 
 namespace Kaleidocode.Gists.Modules.Persistence.Extensions;
 
